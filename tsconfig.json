@@ -1,0 +1,10 @@
+{
+    "compilerOptions": { // how to compile project 
+        "allowJs":false, // allow JS files to be compiled
+        "checkJs": false, // check JS files for errors
+        "outDir": "build",// where to put compiled files
+        "target": "esnext", // what version of JS to compile to
+        "noEmit": true // don't output compiled files, just check for errors
+    },
+    "include": ["src/**/*"] // what files to include in compilation
+}
