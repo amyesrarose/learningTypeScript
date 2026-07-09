@@ -4,13 +4,13 @@ interface Contact extends Adress{ // declare like a class,hold group of variable
     name: string;
     birthDate?: Date; //variablename? means that the variable is optional but if it is used,
     //type of the variable must be Date.
-    status: ContactName; //enum type variable, can only be one of the values in the enum ContactName
+    status: contactStatus; //enum type variable, can only be one of the values in the enum contactStatus
 
 }
-enum ContactName{ // enum limits variable to defined values.Still valid in run time
+enum contactStatus{ // enum limits variable to defined values.Still valid in run time
 Active,
 Inactive, // Also, the enum can be decleraed as  inactive = 0, active = 1, new= 0
- New
+New
 
 }
 interface Adress{
@@ -25,7 +25,7 @@ let firstContact : Contact = {
     id: 1,
     name: "Amy Rose",
 birthDate: new Date("1980-01-01"),
-    status: ContactName.Active,
+    status: contactStatus.Active,
 }
 
 let secondContact : Contact = {
@@ -36,5 +36,21 @@ let secondContact : Contact = {
     city: "Jacksonville",
     state: "FL",
     zipCode: 32207 ,
-    status : ContactName.Inactive
+    status : contactStatus.Inactive
 } 
+
+interface UserInterface{
+    id: number;
+    name: string;
+    age?: number;}
+
+const User: UserInterface = {
+    id: 1,
+    name: "Alice",
+    age: 30
+};
+if(!User.age){
+    console.log("No age of user ")
+}else{
+console.log(User.age);
+}
