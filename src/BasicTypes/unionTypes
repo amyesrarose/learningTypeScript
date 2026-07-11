@@ -1,0 +1,49 @@
+ //.   |  is allows a variable, parameter, or property to hold values of more than 
+ // one specific type. 
+ //  & creates intersection type : works like a extends keyword
+
+type PatientName = String;
+
+// enum can be declared with type alliiesses as
+ type PatientStatus = "active" | "inactive" | "new"
+type PatientBirthDay  = Date | number| string  // union of types
+
+interface Patient{
+    id: number;
+    name: PatientName;
+    birthDate? : PatientBirthDay; //Patient Birthday allies is used to show Date, number and string type od the birthDay data type option'
+    // birthDate? : Date | number | string  EX: | allow system to birthDate variable to have Date,number and string value. 
+    // JS is able to detect and do action acordingliy. as funtion given below
+    status? : PatientStatus;
+}
+
+interface Address{
+    line1: string;
+    line2?: string;
+    city: string;
+    postalCode : string;
+
+}
+type AddressablePatient = Patient & Address  // instead of writing  patient interface extends Addresss interface
+//type alliieses can be written as  this
+const newPatient: AddressablePatient={
+    id: 1001,
+  name: "Alex Smith",
+  line1: "123 Health Ave",
+  city: "San Francisco",
+  postalCode: "94102"
+}
+
+function getBirthDay(Patient :Patient) {
+    if(typeof Patient.birthDate === "number"){
+        return new Date(Patient.birthDate);
+    }
+    if(typeof Patient.birthDate === "string"){
+        return Date.parse(Patient.birthDate)
+    }
+    else{
+        return Patient.birthDate // when hover overed birthday.Date system shows  Date 
+        // JS able to read the proper data type
+
+    }
+}
