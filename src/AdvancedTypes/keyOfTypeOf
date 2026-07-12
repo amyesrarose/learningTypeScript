@@ -1,0 +1,61 @@
+// keyof  Operator.  > works like a getter in Java
+// keyof only works on Types, you must first use typeof to turn the variable into a type.
+
+type AppSettings = {
+    theme: "light" | "dark";
+    notificationsEnabled : boolean;
+    maxUploadSizeMb: number;
+    apiEndpoint : string;
+}
+const currentSettings: AppSettings = {
+  theme: "dark",
+  notificationsEnabled: true,
+  maxUploadSizeMb: 50,
+  apiEndpoint: "https://api.healthapp.com"
+};
+
+
+// SettingKeys is now: "theme" | "notificationsEnabled" | "maxUploadSizeMb" | "apiEndpoint"
+type SettingKeys = keyof AppSettings;
+
+function getSafeSetting(key: SettingKeys) { //  values of SettingKeys come only from "AppSettings"
+  return currentSettings[key];
+}
+
+// 1. Valid Usage
+const currentTheme = getSafeSetting("theme"); 
+
+// 2. Prevented Typo
+const backupUrl = getSafeSetting("apiEndpoint");  // when misspelled type script show and force to fix it
+
+function getSetting<T>(source: T, propertyName : keyof T ){
+    return source[propertyName];
+}
+
+
+// TypeOf 
+
+const myType ={min:1, max:280 }
+function memorize(source : typeof myType){ // Thanks to "typeof" keyword TS undestands mtype is number
+
+}
+// KeyOf and TypeOf together 
+const rolesConfig = {
+  admin: "Full Access",
+  editor: "Edit Access",
+  viewer: "Read Only"
+};
+
+// 1. typeof rolesConfig gives us the object's type structure
+// 2. keyof extracts the keys from that structure
+type RoleNames = keyof typeof rolesConfig;
+
+// RoleNames is now: "admin" | "editor" | "viewer"
+
+function assignRole(role: RoleNames) {
+  console.log(`Assigning role: ${role}`);
+}
+
+assignRole("admin");  // Valid
+//assignRole("guest");  // Error: Argument of type '"guest"' is not assignable
+assignRole("viewer") // JS  auto suggests and allow only 3 value
