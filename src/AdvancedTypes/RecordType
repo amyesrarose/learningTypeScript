@@ -1,0 +1,6 @@
+// Record type use to limit "any" type usage , We can overcome some of the problem without 
+// caused by multiple types needs
+let x : Record<string,string | number |boolean> = {name :"Amy Rose"}
+x.number =12334
+x.active = true
+x.name = "Joe"
